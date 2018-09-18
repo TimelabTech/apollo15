@@ -24,8 +24,6 @@ img_data = np.zeros((height, width))
 img_avg_data = np.zeros((180, 360))
 img_avg_counts_data = np.zeros((180, 360))
 
-avg_count_arr = lcHelper.get_channels_avg_count(lc)
-
 # Calculates the avg energy per ra dec and max energy
 max_energy = 0
 for i in range(0, len(lc[:, 0])):
@@ -35,7 +33,7 @@ for i in range(0, len(lc[:, 0])):
     ra_int = int(coords[0])
     dec_int = int(coords[1] + 90.0)
 
-    total_energy = lcHelper.get_sum_of_energies(lc[i,:], avg_count_arr)
+    total_energy = lcHelper.get_sum_of_energies(lc[i,:])
 
     if total_energy > 0:
         img_avg_counts_data[dec_int, ra_int] += 1

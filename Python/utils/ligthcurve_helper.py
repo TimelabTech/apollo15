@@ -7,7 +7,7 @@ def get_ligthcurve(path):
 
 
 # Multiplies the counts of a specified channel by the energy related to this channel.
-def get_energy(channel_col, lc_row, avg_count_arr):
+def get_energy(channel_col, lc_row):
     energy = 0
 
     if (lc_row[consts.LC_FLAG_COL] == consts.NORMAL_MODE \
@@ -15,10 +15,13 @@ def get_energy(channel_col, lc_row, avg_count_arr):
         and lc_row[channel_col] > 0:
 
         ch_idx = channel_col - consts.LC_FIRST_CHANNEL_COL
-        avg_ch_energy = avg_count_arr[ch_idx] * consts.CHANNEL_ENERGIES[ch_idx]
-        energy = (lc_row[channel_col] * consts.CHANNEL_ENERGIES[ch_idx]) - avg_ch_energy
+        real_counts = lc_row[channel_col] - consts.LC_BACKGROUND[ch_idx]
+        if real_counts <= 0:
+            return 0
 
-        if energy < 0:
+        energy = real_counts * consts.CHANNEL_ENERGIES[ch_idx]
+
+        if energy <= 0:
             return 0
 
         if lc_row[consts.LC_FLAG_COL] == consts.EXTENDED_MODE:
@@ -28,23 +31,13 @@ def get_energy(channel_col, lc_row, avg_count_arr):
 
 
 # Gets the sum of the energies of all channels
-def get_sum_of_energies(lc_row, avg_count_arr):
+def get_sum_of_energies(lc_row):
 
     sum_of_energies = 0
     for channel in range(consts.LC_FIRST_CHANNEL_COL, consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
-        sum_of_energies += get_energy(channel, lc_row, avg_count_arr)
+        sum_of_energies += get_energy(channel, lc_row)
 
     return sum_of_energies
-
-
-# Gets the sum of the energies of all channels
-def get_channels_avg_count(lc):
-
-    avg_count_arr = np.zeros(consts.LC_NUM_CHANNELS)
-    for channel in range(consts.LC_FIRST_CHANNEL_COL, consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
-        avg_count_arr[channel - consts.LC_FIRST_CHANNEL_COL] = np.average(lc[:, channel])
-
-    return avg_count_arr
 
 
 # Finds the idx of the nearest value on the array, array must be sorted

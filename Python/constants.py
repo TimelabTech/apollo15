@@ -8,6 +8,7 @@ LC_TIME_COL = 0
 LC_FLAG_COL = 1
 LC_FIRST_CHANNEL_COL = 2
 LC_NUM_CHANNELS = 8
+LC_BACKGROUND = [ 69.38, 20.14, 28.76, 35.45, 32.90, 36.42, 32.86, 139.92 ]
 
 #====================================
 # XRFS Instrument
