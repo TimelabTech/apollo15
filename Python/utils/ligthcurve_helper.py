@@ -19,7 +19,7 @@ def get_energy(channel_col, lc_row):
         if real_counts <= 0:
             return 0
 
-        energy = real_counts * consts.CHANNEL_ENERGIES[ch_idx]
+        energy = (real_counts * consts.CHANNEL_ENERGIES[ch_idx]) / consts.LC_TIME_BIN
 
         if energy <= 0:
             return 0
@@ -34,7 +34,8 @@ def get_energy(channel_col, lc_row):
 def get_sum_of_energies(lc_row):
 
     sum_of_energies = 0
-    for channel in range(consts.LC_FIRST_CHANNEL_COL, consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
+    for channel in range(consts.LC_FIRST_CHANNEL_COL,
+                        consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
         sum_of_energies += get_energy(channel, lc_row)
 
     return sum_of_energies
@@ -82,3 +83,35 @@ def filter_by_gti(lc, gtis, time_column=0):
             flt_lc = np.concatenate((flt_lc, lc[start_event_idx:end_event_idx, :]))
 
     return flt_lc
+
+
+# Extracts a GTI array from a BODY-Theta_Phi file with a given threshold
+def get_gtis_from_file(path, threshold):
+
+    data = np.loadtxt(path, delimiter=",") # Load the CSV file
+    rows = len(data)
+
+    gtis = []
+    gtiStart = -1
+    gtiEnd = -1
+
+    if rows > 0:
+        for i in range(rows):
+
+            time = data[i, 0]
+            theta = data[i, 1]
+
+            if theta > threshold:
+                # We are inside a GTI
+                if gtiStart > 0:
+                    gtiEnd = time
+                else:
+                    gtiStart = time
+
+            elif (gtiStart > 0) and (gtiStart < gtiEnd):
+                # We are closing a GTI
+                gtis.extend([[gtiStart, gtiEnd]])
+                gtiStart = -1
+                gtiEnd = -1
+
+    return gtis

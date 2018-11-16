@@ -7,7 +7,7 @@ def load_attitude (filePath):
                     comments="#",
                     delimiter=",",
                     skiprows=consts.ATT_HEADER_ROWS,
-                    #converters = {consts.ATT_RA_COL: lambda s: 360.0 * (float(s.strip() or 0) / 24.0)},  #Convert hours to degrees
+                    converters = {consts.ATT_RA_COL: lambda s: 360.0 * (float(s.strip() or 0) / 24.0)},  #Convert hours to degrees
                     usecols = (consts.ATT_TIME_COL, consts.ATT_RA_COL, consts.ATT_DEC_COL))
 
 

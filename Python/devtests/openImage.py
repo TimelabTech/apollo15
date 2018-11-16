@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from astropy.io import fits
 
-hdu_list = fits.open("../HST/u2c70104t/u2c70104t_c0f.fits")
+hdu_list = fits.open("../../HST/u2c70104t/u2c70104t_c0f.fits")
 hdu_list.info()
 
 image_data = hdu_list[0].data

@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# This code aims to extract some statistics about the time steps
+# of the ligthcurve
+# Author: Ricardo Vallés Blanco (ESAC)
+
 import numpy as np
 from utils import ligthcurve_helper as lcHelper
 from utils import attitude_helper as attHelper
@@ -10,7 +14,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 import constants as consts
-
 
 
 lc = lcHelper.get_ligthcurve(consts.LC_FILE)
