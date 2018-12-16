@@ -5,18 +5,35 @@ import constants as consts
 def get_ligthcurve(path):
     return np.loadtxt(path)
 
+# Returns the background corrected total counts
+def get_total_counts(lc_row):
+
+    total_counts = 0
+
+    if lc_row[consts.LC_FLAG_COL] in consts.SUPPORTED_MODES:
+
+        for channel in range(consts.LC_FIRST_CHANNEL_COL,
+                            consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
+
+            counts = lc_row[channel]
+            if counts > 0:
+                ch_idx = channel - consts.LC_FIRST_CHANNEL_COL
+                corrected_counts = counts - consts.LC_BACKGROUND[ch_idx]
+                total_counts += corrected_counts
+
+    return total_counts
+
 
 # Multiplies the counts of a specified channel by the energy related to this channel.
 def get_energy(channel_col, lc_row):
     energy = 0
 
-    if (lc_row[consts.LC_FLAG_COL] == consts.NORMAL_MODE \
-        or lc_row[consts.LC_FLAG_COL] == consts.EXTENDED_MODE) \
+    if lc_row[consts.LC_FLAG_COL] in consts.SUPPORTED_MODES \
         and lc_row[channel_col] > 0:
 
         ch_idx = channel_col - consts.LC_FIRST_CHANNEL_COL
         real_counts = lc_row[channel_col] - consts.LC_BACKGROUND[ch_idx]
-        if real_counts <= 0:
+        if real_counts <= consts.MIN_COUNTS:
             return 0
 
         energy = (real_counts * consts.CHANNEL_ENERGIES[ch_idx]) / consts.LC_TIME_BIN

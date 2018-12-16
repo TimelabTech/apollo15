@@ -19,11 +19,13 @@ LC_BACKGROUND = [ 69.38, 20.14, 28.76, 35.45, 32.90, 36.42, 32.86, 139.92 ]
 #====================================
 # XRFS Instrument
 #====================================
-FOV = 56.0 #  Field of view, (MRSC width in degrees)
+FOV = 56.0 # Field of view, (MRSC width in degrees)
 NORMAL_MODE = 16
 EXTENDED_MODE = 144
 EXTENDED_MODE_FACTOR = 2.0
 CHANNEL_ENERGIES = [ 0.90, 1.18, 1.45, 1.75, 2.05, 2.32, 2.60, 3.50 ]  # Average of paper ranges in keV, from: https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_data/ldp/xray_spectrometer/
+SUPPORTED_MODES = [ NORMAL_MODE, EXTENDED_MODE ]
+MIN_COUNTS = -150
 
 #Map of Relative Source Contributions
 # Note: This map has been expanded with three rows/cols per side and was filled
@@ -61,15 +63,16 @@ ATT_DEC_COL = 2
 # BODY-Theta_Phi files
 #====================================
 TP_SOLAR_FILE = "../Data/Sun-theta_phi.txt"
-TP_SOLAR_THRESHOLD = 30.0
+TP_SOLAR_THRESHOLD = 32.0
 
 
 #====================================
 # Image generation
 #====================================
-OUTPUT_FOLDER = "../output/Apollo15_XRFS_Be_AllSkyFits"
-IMG_SCALE = 1 # Sets the resolution of the output image -> Scale * (360x180)px
-COLORS = 255
-MIN_EXPOSURE = 1
+OUTPUT_FOLDER = "../output/Apollo15_XRFS_Be_AllSkyFits_AllChannels/"  # Must exist
+IMG_SCALE = 1  # Sets the resolution of the output image -> Scale * (360x180)px
+COLORS = 255.0
+MIN_EXPOSURE = 0.001
 EQUALIZE_IMAGE = True
-WRITE_FITS_FILES = False
+WRITE_FITS_FILES = True
+GEN_ALADIN_READY_FITS = True
