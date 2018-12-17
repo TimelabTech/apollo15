@@ -3,7 +3,7 @@
 
 # This code is a Sky Pixel Variability data extractor
 # Extracts the data of how the energy from a coordinates in the sky varies in time.
-# Author: Ricardo Vallés Blanco (ESAC)
+# Author: Ricardo Vallés Blanco (Timelab Technologies)
 
 import numpy as np
 from utils import ligthcurve_helper as lcHelper

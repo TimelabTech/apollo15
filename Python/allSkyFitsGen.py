@@ -3,7 +3,7 @@
 
 # ALLSKY FITS GENERATOR
 # ===============================================
-# Author: Ricardo Vallés Blanco (ESAC)
+# Author: Ricardo Vallés Blanco (Timelab Technologies)
 #
 # The following code reads a ligthcurve and an
 # attitude file and generates an all sky image

@@ -3,7 +3,7 @@
 
 # This code aims to extract some statistics about the time steps
 # of the ligthcurve
-# Author: Ricardo Vallés Blanco (ESAC)
+# Author: Ricardo Vallés Blanco (Timelab Technologies)
 
 import numpy as np
 from utils import ligthcurve_helper as lcHelper
