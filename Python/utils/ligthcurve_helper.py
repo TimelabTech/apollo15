@@ -14,7 +14,7 @@ def get_total_counts(lc_row):
 
         for channel in range(consts.LC_FIRST_CHANNEL_COL,
                             consts.LC_FIRST_CHANNEL_COL + consts.LC_NUM_CHANNELS):
-
+              
             counts = lc_row[channel]
             if counts > 0:
                 ch_idx = channel - consts.LC_FIRST_CHANNEL_COL

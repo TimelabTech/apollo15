@@ -123,29 +123,30 @@ for dec in range(0, height):
 
 # Show Expousure, Counts, Computed Counts and Equalized data plots
 # =====================================================
-
-plt.title("Exposure Map")
-plt.imshow(img_exposure_map)
-plt.colorbar()
-plt.annotate('SCO X-1', xy=(244.979 * consts.IMG_SCALE, (-15.640 + 90) * consts.IMG_SCALE),
-             xycoords='data', xytext=(0.5, 0.5), textcoords='figure fraction',
-             arrowprops=dict(arrowstyle="->"))
-plt.annotate('Cyg X-1', xy=(299.59 * consts.IMG_SCALE, (35.20 + 90) * consts.IMG_SCALE),
-             xycoords='data', xytext=(0.75, 0.75), textcoords='figure fraction',
-             arrowprops=dict(arrowstyle="->"))
-plt.show()
-
-
-plt.title("Counts Map")
-plt.imshow(img_total_counts_map)
-plt.colorbar()
-plt.show()
+if consts.SHOW_PLOTS:
+    
+    plt.title("Exposure Map")
+    plt.imshow(img_exposure_map)
+    plt.colorbar()
+    plt.annotate('SCO X-1', xy=(244.979 * consts.IMG_SCALE, (-15.640 + 90) * consts.IMG_SCALE),
+                 xycoords='data', xytext=(0.5, 0.5), textcoords='figure fraction',
+                 arrowprops=dict(arrowstyle="->"))
+    plt.annotate('Cyg X-1', xy=(299.59 * consts.IMG_SCALE, (35.20 + 90) * consts.IMG_SCALE),
+                 xycoords='data', xytext=(0.75, 0.75), textcoords='figure fraction',
+                 arrowprops=dict(arrowstyle="->"))
+    plt.show()
 
 
-plt.title("All Sky Plot")
-plt.imshow(img_comp_counts_map)
-plt.colorbar()
-plt.show()
+    plt.title("Counts Map")
+    plt.imshow(img_total_counts_map)
+    plt.colorbar()
+    plt.show()
+
+
+    plt.title("All Sky Plot")
+    plt.imshow(img_comp_counts_map)
+    plt.colorbar()
+    plt.show()
 
 
 #Img equalization
