@@ -24,7 +24,7 @@ LC_TIME_BIN = 8
 LC_FLAG_COL = 1
 
 # Index of the column with the first channel data in the lc file. Next channels must be consecutives.
-LC_FIRST_CHANNEL_COL = 2
+LC_FIRST_CHANNEL_COL = 2
 
 # Number of channel´s data columns in the lc file
 LC_NUM_CHANNELS = 8
@@ -125,10 +125,10 @@ TP_SOLAR_THRESHOLD = 32.0
 #====================================
 
 # Path of the output folder for writing the All Sky Fits. Must exist
-OUTPUT_FOLDER = "../output/Apollo15_XRFS_Be_AllSkyFits_AllChannels/"
+OUTPUT_FOLDER = "../output/HiPS_RGB/Apollo15_XRFS_Be_AllSkyFits_Channels7_8_EQ/"
 
 # Sets the resolution of the output image -> Scale * (360x180)px
-IMG_SCALE = 1
+IMG_SCALE = 4
 
 # Sets the color scale range. Must be 255 if using equalization.
 COLORS = 255.0
@@ -137,10 +137,10 @@ COLORS = 255.0
 MIN_EXPOSURE = 1.0
 
 # Show plots after computing the all sky data
-SHOW_PLOTS = False
+SHOW_PLOTS = True
 
 # Equalize all sky image before exporting to Fits files
-EQUALIZE_IMAGE = False
+EQUALIZE_IMAGE = True
 
 # If True writes the all sky image as Fits files in the output folder
 WRITE_FITS_FILES = True

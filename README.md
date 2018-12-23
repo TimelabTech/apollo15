@@ -1,6 +1,6 @@
 # apollo15
 Apollo 15 X-Ray All Sky Map
-Author: Ricardo Vallés Blanco (ESAC)
+Author: Ricardo Vallés Blanco (Timelab Technologies)
 
  Steps for generating All Sky Map with Aladin
  ========================================================

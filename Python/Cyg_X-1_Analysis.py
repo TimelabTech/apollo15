@@ -6,7 +6,7 @@
 # outside or just in the borders of the XRFS FOV.
 # The counts received from observed pointining near to Cyg X-1
 # are much smaller that the ones coming from SCO X-1
-# Author: Ricardo Vallés Blanco (ESAC)
+# Author: Ricardo Vallés Blanco (Timelab Technologies)
 
 import numpy as np
 from utils import ligthcurve_helper as lcHelper

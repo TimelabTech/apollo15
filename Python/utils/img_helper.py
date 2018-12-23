@@ -43,7 +43,7 @@ def drawFOV (ra, dec, value, img_data, exposure_map):
 def saveImage (imageData, ra, dec, scale, fileName):
 
     try:
-        # Initialize WCS information
+        # Initialize WCS information, http://docs.astropy.org/en/stable/wcs/
         wcs = WCS(naxis=2)
 
         # Use the center of the image as projection center

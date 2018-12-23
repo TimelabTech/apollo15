@@ -1,6 +1,6 @@
 # apollo15
 Apollo 15 X-Ray All Sky Map (Variability Analysis)
-Author: Ricardo Vallés Blanco (ESAC)
+Author: Ricardo Vallés Blanco (Timelab Technologies)
 
  All Sky XRFS Be Variability Analysis
  ========================================================

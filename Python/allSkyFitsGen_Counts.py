@@ -90,7 +90,7 @@ img_exposure_map = np.zeros((height, width))
 # Draw each observation on its location inside the counts and exposure maps
 for i in range(0, len(lc[:, 0])):
 
-    counts = lcHelper.get_total_counts(lc[i,:])  # get_sum_of_energies
+    counts = lcHelper.get_total_counts(lc[i,:])
 
     if counts >= consts.MIN_COUNTS and counts != 0:
         coords = attHelper.get_ra_dec(lc[i, consts.LC_TIME_COL], att)
@@ -111,20 +111,19 @@ for dec in range(0, height):
             img_comp_counts_map[dec, ra] = img_total_counts_map[dec, ra] / img_exposure_map[dec, ra]
 
 # Calculates the min and max computed counts
-min_flux = np.min(img_comp_counts_map)
-max_flux = np.max(img_comp_counts_map)
+min_counts = np.min(img_comp_counts_map)
+max_counts = np.max(img_comp_counts_map) - min_counts
 
 # Calibrate each pixel value in range 0..255
 for dec in range(0, height):
     for ra in range(0, width):
-        img_comp_counts_map[dec, ra] = int(((img_comp_counts_map[dec, ra] - min_flux) / max_flux) * consts.COLORS)
-
+        img_comp_counts_map[dec, ra] = int(((img_comp_counts_map[dec, ra] - min_counts) / max_counts) * consts.COLORS)
 
 
 # Show Expousure, Counts, Computed Counts and Equalized data plots
 # =====================================================
 if consts.SHOW_PLOTS:
-    
+
     plt.title("Exposure Map")
     plt.imshow(img_exposure_map)
     plt.colorbar()
@@ -153,16 +152,17 @@ if consts.SHOW_PLOTS:
 if consts.EQUALIZE_IMAGE:
     img_comp_counts_map = hist.histeq(img_comp_counts_map)
 
-    plt.title("All Sky Equalized Plot")
-    plt.imshow(img_comp_counts_map)
-    plt.colorbar()
-    plt.annotate('SCO X-1', xy=(244.979 * consts.IMG_SCALE, (-15.640 + 90) * consts.IMG_SCALE),
-                 xycoords='data', xytext=(0.5, 0.5), textcoords='figure fraction',
-                 arrowprops=dict(arrowstyle="->"))
-    plt.annotate('Cyg X-1', xy=(299.59 * consts.IMG_SCALE, (35.20 + 90) * consts.IMG_SCALE),
-                 xycoords='data', xytext=(0.75, 0.75), textcoords='figure fraction',
-                 arrowprops=dict(arrowstyle="->"))
-    plt.show()
+    if consts.SHOW_PLOTS:
+        plt.title("All Sky Equalized Plot")
+        plt.imshow(img_comp_counts_map)
+        plt.colorbar()
+        plt.annotate('SCO X-1', xy=(244.979 * consts.IMG_SCALE, (-15.640 + 90) * consts.IMG_SCALE),
+                     xycoords='data', xytext=(0.5, 0.5), textcoords='figure fraction',
+                     arrowprops=dict(arrowstyle="->"))
+        plt.annotate('Cyg X-1', xy=(299.59 * consts.IMG_SCALE, (35.20 + 90) * consts.IMG_SCALE),
+                     xycoords='data', xytext=(0.75, 0.75), textcoords='figure fraction',
+                     arrowprops=dict(arrowstyle="->"))
+        plt.show()
 
 
 # Extract clipped images and save as Fits Images

@@ -3,7 +3,7 @@
 
 # Creates a CSV file with the data of the LC FILE plus coordinates
 # and total energy columns
-# Author: Ricardo Vallés Blanco (ESAC)
+# Author: Ricardo Vallés Blanco (Timelab Technologies)
 
 import numpy as np
 from utils import ligthcurve_helper as lcHelper
